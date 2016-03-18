@@ -1,0 +1,13 @@
+<h2>Score list:</h2>
+
+<div class="score-table">
+    <ul>
+        <li *ngFor="#item of items | async">
+            <div class="left">{{item.username}}</div>
+            <div class="right">{{item.time}}</div>
+        </li>
+    </ul>
+</div>
+
+<button (click)="goBack()">Back</button>
+

@@ -1,0 +1,39 @@
+.main {
+    width: 100%;
+    height: 100%;
+}
+.slidegrid{
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 45vw;
+    height: 45vw;
+    border: solid 5px darkgreen;
+}
+
+.cell {
+    width: 33%;
+    height: 33%;
+    border: solid 2px white;
+}
+
+#cell span {
+    background-color: white;
+}
+
+.cell span {
+    width: 100%;
+    height: 100%;
+    background-color: darkgreen;
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-cell {
+    background-color: white;
+}
