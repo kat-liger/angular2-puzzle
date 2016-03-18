@@ -1,16 +1,14 @@
-System.register(['angular2/core', 'angular2/router', './timer.component'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', './timer.component', './services/score.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
-        switch (arguments.length) {
-            case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
-            case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
-            case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
-        }
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, core_2, timer_component_1;
+    var core_1, router_1, core_2, http_1, timer_component_1, score_service_1;
     var GridComponent;
     return {
         setters:[
@@ -21,12 +19,19 @@ System.register(['angular2/core', 'angular2/router', './timer.component'], funct
             function (router_1_1) {
                 router_1 = router_1_1;
             },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
             function (timer_component_1_1) {
                 timer_component_1 = timer_component_1_1;
+            },
+            function (score_service_1_1) {
+                score_service_1 = score_service_1_1;
             }],
         execute: function() {
             GridComponent = (function () {
-                function GridComponent() {
+                function GridComponent(_scoreService) {
+                    this._scoreService = _scoreService;
                     this.grid = [];
                 }
                 GridComponent.prototype.initGrid = function () {
@@ -65,9 +70,6 @@ System.register(['angular2/core', 'angular2/router', './timer.component'], funct
                             if (this.sameArray(this.grid, [1, 2, 3, 4, 5, 6, 7, 8, null]) ||
                                 this.sameArray(this.grid, [1, 2, 3, 4, 5, 6, 7, null, 8])) {
                                 this.notifyWinner();
-                                //console.log(name);
-                                //open modal window
-                                this.openModal();
                             }
                         }
                     }
@@ -83,28 +85,6 @@ System.register(['angular2/core', 'angular2/router', './timer.component'], funct
                     return array1.length == array2.length && array1.every(function (element, index) {
                         return element === array2[index];
                     });
-                };
-                ;
-                GridComponent.prototype.openModal = function () {
-                    /*let component = YesNoModal;
-                     let dialog: Promise<ModalDialogInstance>;
-            
-                     var modalContent = new YesNoModalContent('Modal title', 'Modal content', false, "Ok", "Cancel")
-                     let bindings = Injector.resolve([provide(ICustomModal, {useValue: modalContent})]);
-            
-                     var modConf = new ModalConfig("sm", true, null);
-            
-                     dialog = this.modal.open(<any>component, bindings, modConf);
-                     dialog.then(
-                     resultPromise => {
-                     return resultPromise.result.then(
-                     result => {
-                     this.lastResult = result; //result is true
-                     },
-                     () => this.lastResult = 'Canceled' //result is false
-                     );
-                     }
-                     );*/
                 };
                 ;
                 /**
@@ -127,12 +107,13 @@ System.register(['angular2/core', 'angular2/router', './timer.component'], funct
                     var name = prompt("Congrats! You won and your result is " + endTime + " Please enter your name to save your awesome result in our database");
                     if (name.replace(/\s/g, "").length > 0) {
                         console.log("now we can save the data to DB", name, " - ", endTime);
+                        this._scoreService.postItem({ "username": name, "time": endTime });
                     }
                 };
                 __decorate([
                     core_2.ViewChild(timer_component_1.TimerComponent), 
                     __metadata('design:type', timer_component_1.TimerComponent)
-                ], GridComponent.prototype, "_timerComponent");
+                ], GridComponent.prototype, "_timerComponent", void 0);
                 GridComponent = __decorate([
                     core_1.Component({
                         selector: 'grid',
@@ -141,9 +122,10 @@ System.register(['angular2/core', 'angular2/router', './timer.component'], funct
                         directives: [
                             router_1.ROUTER_DIRECTIVES,
                             timer_component_1.TimerComponent
-                        ]
+                        ],
+                        providers: [http_1.HTTP_PROVIDERS, score_service_1.ScoreService]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [score_service_1.ScoreService])
                 ], GridComponent);
                 return GridComponent;
             })();

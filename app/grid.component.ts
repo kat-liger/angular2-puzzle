@@ -1,8 +1,10 @@
 import {Component, OnInit, Injector, provide} from 'angular2/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 import {ViewChild} from 'angular2/core';
+import { HTTP_PROVIDERS } from 'angular2/http';
 
-import {TimerComponent} from './timer.component';
+import { TimerComponent } from './timer.component';
+import { ScoreService } from './services/score.service';
 
 @Component({
     selector: 'grid',
@@ -11,14 +13,18 @@ import {TimerComponent} from './timer.component';
     directives: [
         ROUTER_DIRECTIVES,
         TimerComponent
-    ]
+    ],
+    providers: [HTTP_PROVIDERS, ScoreService]
 })
 
 export class GridComponent implements OnInit {
     public grid:number[] = [];
 
     @ViewChild(TimerComponent)
-    private _timerComponent:TimerComponent;
+    private _timerComponent: TimerComponent;
+
+    constructor(
+        private _scoreService: ScoreService) { }
 
     initGrid() {
         var i: number = 1;
@@ -60,9 +66,6 @@ export class GridComponent implements OnInit {
                 if (this.sameArray(this.grid, [1, 2, 3, 4, 5, 6, 7, 8, null]) ||
                     this.sameArray(this.grid, [1, 2, 3, 4, 5, 6, 7, null, 8])) {
                     this.notifyWinner();
-                    //console.log(name);
-                    //open modal window
-                    this.openModal();
                 }
             }
         }
@@ -78,28 +81,6 @@ export class GridComponent implements OnInit {
         return array1.length == array2.length && array1.every(function(element, index) {
                 return element === array2[index];
             });
-    };
-
-    openModal() {
-        /*let component = YesNoModal;
-         let dialog: Promise<ModalDialogInstance>;
-
-         var modalContent = new YesNoModalContent('Modal title', 'Modal content', false, "Ok", "Cancel")
-         let bindings = Injector.resolve([provide(ICustomModal, {useValue: modalContent})]);
-
-         var modConf = new ModalConfig("sm", true, null);
-
-         dialog = this.modal.open(<any>component, bindings, modConf);
-         dialog.then(
-         resultPromise => {
-         return resultPromise.result.then(
-         result => {
-         this.lastResult = result; //result is true
-         },
-         () => this.lastResult = 'Canceled' //result is false
-         );
-         }
-         );*/
     };
 
     /**
@@ -122,6 +103,7 @@ export class GridComponent implements OnInit {
         var name = prompt("Congrats! You won and your result is " + endTime + " Please enter your name to save your awesome result in our database");
         if (name.replace(/\s/g, "").length > 0) {
             console.log("now we can save the data to DB", name, " - ", endTime);
+            this._scoreService.postItem({ "username": name, "time": endTime });
         }
     }
 
