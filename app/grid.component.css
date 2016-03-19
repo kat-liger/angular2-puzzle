@@ -37,3 +37,12 @@
 .empty-cell {
     background-color: white;
 }
+
+/* mobile */
+
+@media only screen and (max-width: 640px) {
+    .slidegrid{
+        width: 90vw;
+        height: 90vw;
+    }
+}
