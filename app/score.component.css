@@ -1,5 +1,17 @@
 ul {
     list-style-type:none;
+    display: table;
+    width: 100%;
+}
+
+ul li {
+    display: table-row;
+}
+
+ul li div {
+    display: table-cell;
+    width: 33%;
+    text-align: left;
 }
 
 .left{

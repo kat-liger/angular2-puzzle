@@ -1,10 +1,11 @@
-<h2>Score list:</h2>
+<h2>Top 5 results:</h2>
 
 <div class="score-table">
     <ul>
-        <li *ngFor="#item of items | async">
-            <div class="left">{{item.username}}</div>
-            <div class="right">{{item.time}}</div>
+        <li *ngFor="#item of items | async; #i=index">
+            <div>{{i+1}}.</div>
+            <div>{{item.username}}</div>
+            <div>{{item.time}}</div>
         </li>
     </ul>
 </div>
