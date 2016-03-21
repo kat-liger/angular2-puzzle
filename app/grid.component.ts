@@ -103,7 +103,7 @@ export class GridComponent implements OnInit {
         var name = prompt("Congrats! You won and your result is " + endTime + " Please enter your name to save your awesome result in our database");
         if (name.replace(/\s/g, "").length > 0) {
             console.log("now we can save the data to DB", name, " - ", endTime);
-            this._scoreService.postItem({ "username": name, "time": endTime });
+            this._scoreService.postItem({ "username": name, "time": endTime }).subscribe( );
         }
     }
 
