@@ -45,13 +45,11 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './timer.c
                 GridComponent.prototype.ngOnInit = function () {
                     this.initGrid();
                     //shuffle the grid array in random order
-                    //this.shuffle(this.grid);
+                    this.shuffle(this.grid);
                     this.swap(7, this.grid.indexOf(null));
                 };
                 ;
                 GridComponent.prototype.checkClicked = function (index) {
-                    //console.log("cell clicked", index);
-                    //console.log("index of #cell", this.grid.indexOf(null));
                     this.checkNeighbors(index);
                 };
                 ;

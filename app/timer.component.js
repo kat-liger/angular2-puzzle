@@ -23,8 +23,6 @@ System.register(['angular2/core'], function(exports_1) {
                     this.currentTime = new Date().getTime();
                     this.initialTime = this.currentTime;
                 }
-                //public endTime;
-                //public endTimeStr;
                 TimerComponent.prototype.ngOnInit = function () {
                     console.log("timer init");
                     this.startTimer();
@@ -62,10 +60,7 @@ System.register(['angular2/core'], function(exports_1) {
                     }, 1000);
                 };
                 TimerComponent.prototype.stopTimer = function () {
-                    //this.endTime = this.time;
-                    //this.endTimeStr = this.timeStr;
                     clearInterval(this.interval);
-                    //return this.endTime;
                 };
                 TimerComponent = __decorate([
                     core_1.Component({

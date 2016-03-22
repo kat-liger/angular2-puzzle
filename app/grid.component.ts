@@ -37,13 +37,11 @@ export class GridComponent implements OnInit {
     ngOnInit() {
         this.initGrid();
         //shuffle the grid array in random order
-        //this.shuffle(this.grid);
+        this.shuffle(this.grid);
         this.swap(7,this.grid.indexOf(null));
     };
 
     checkClicked(index) {
-        //console.log("cell clicked", index);
-        //console.log("index of #cell", this.grid.indexOf(null));
         this.checkNeighbors(index);
 
     };

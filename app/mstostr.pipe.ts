@@ -1,8 +1,7 @@
 import {Pipe, PipeTransform} from 'angular2/core';
 
 /*
- * Transform data into array, sort it by time in ascending order and trim
- * Takes an Observable argument
+ * Transform time in ms to hh:mm:ss string
  * Usage:
  *   time | msToStr
  *

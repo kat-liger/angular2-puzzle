@@ -12,8 +12,6 @@ export class TimerComponent implements OnInit {
     private currentTime = new Date().getTime();
     private initialTime = this.currentTime;
     public interval;
-    //public endTime;
-    //public endTimeStr;
 
     ngOnInit() {
         console.log("timer init");
@@ -59,10 +57,7 @@ export class TimerComponent implements OnInit {
     }
 
     public stopTimer() {
-        //this.endTime = this.time;
-        //this.endTimeStr = this.timeStr;
         clearInterval(this.interval);
-        //return this.endTime;
     }
 
 
