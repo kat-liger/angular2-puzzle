@@ -18,14 +18,15 @@ System.register(['angular2/core'], function(exports_1) {
         execute: function() {
             TimerComponent = (function () {
                 function TimerComponent() {
-                    this.time = '00:00:00';
+                    this.time = 0;
+                    this.timeStr = '00:00:00';
                     this.currentTime = new Date().getTime();
                     this.initialTime = this.currentTime;
                 }
+                //public endTime;
+                //public endTimeStr;
                 TimerComponent.prototype.ngOnInit = function () {
                     console.log("timer init");
-                    //console.log("initialTime", this.initialTime);
-                    //console.log("initialTime + 62sec", this.convertTime(62000));
                     this.startTimer();
                 };
                 /**
@@ -56,18 +57,20 @@ System.register(['angular2/core'], function(exports_1) {
                     var _this = this;
                     this.interval = setInterval(function () {
                         var currentTime = new Date().getTime();
-                        _this.time = _this.convertTime(currentTime - _this.initialTime);
+                        _this.time = currentTime - _this.initialTime;
+                        _this.timeStr = _this.convertTime(currentTime - _this.initialTime);
                     }, 1000);
                 };
                 TimerComponent.prototype.stopTimer = function () {
-                    this.endTime = this.time;
+                    //this.endTime = this.time;
+                    //this.endTimeStr = this.timeStr;
                     clearInterval(this.interval);
-                    return this.endTime;
+                    //return this.endTime;
                 };
                 TimerComponent = __decorate([
                     core_1.Component({
                         selector: 'timer',
-                        template: '<h2>Time: {{time}}</h2>'
+                        template: '<h2>Time: {{timeStr}}</h2>'
                     }), 
                     __metadata('design:paramtypes', [])
                 ], TimerComponent);

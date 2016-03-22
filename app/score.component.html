@@ -2,10 +2,10 @@
 
 <div class="score-table">
     <ul>
-        <li *ngFor="#item of items | async; #i=index">
+        <li *ngFor="#item of items | async ; #i=index">
             <div>{{i+1}}.</div>
             <div>{{item.username}}</div>
-            <div>{{item.time}}</div>
+            <div>{{item.time | msToStr }}</div>
         </li>
     </ul>
 </div>

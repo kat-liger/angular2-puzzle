@@ -2,21 +2,21 @@ import {Component, OnInit} from 'angular2/core';
 
 @Component({
     selector: 'timer',
-    template: '<h2>Time: {{time}}</h2>'
+    template: '<h2>Time: {{timeStr}}</h2>'
 })
 
 export class TimerComponent implements OnInit {
 
-    public time = '00:00:00';
+    public time = 0;
+    public timeStr = '00:00:00';
     private currentTime = new Date().getTime();
     private initialTime = this.currentTime;
     public interval;
-    public endTime;
+    //public endTime;
+    //public endTimeStr;
 
     ngOnInit() {
         console.log("timer init");
-        //console.log("initialTime", this.initialTime);
-        //console.log("initialTime + 62sec", this.convertTime(62000));
         this.startTimer();
     }
 
@@ -52,15 +52,17 @@ export class TimerComponent implements OnInit {
         this.interval = setInterval(
             () => {
                 var currentTime = new Date().getTime();
-                this.time = this.convertTime(currentTime - this.initialTime);
+                this.time = currentTime - this.initialTime;
+                this.timeStr = this.convertTime(currentTime - this.initialTime);
             }, 1000
         );
     }
 
     public stopTimer() {
-        this.endTime = this.time;
+        //this.endTime = this.time;
+        //this.endTimeStr = this.timeStr;
         clearInterval(this.interval);
-        return this.endTime;
+        //return this.endTime;
     }
 
 

@@ -103,11 +103,12 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './timer.c
                 ;
                 GridComponent.prototype.notifyWinner = function () {
                     this._timerComponent.stopTimer();
-                    var endTime = this._timerComponent.endTime;
-                    var name = prompt("Congrats! You won and your result is " + endTime + " Please enter your name to save your awesome result in our database");
-                    if (name.replace(/\s/g, "").length > 0) {
+                    var endTime = this._timerComponent.time;
+                    var endTimeStr = this._timerComponent.timeStr;
+                    var name = prompt("Congrats! You won and your result is " + endTimeStr + " Please enter your name to save your awesome result to our database");
+                    if (name) {
                         console.log("now we can save the data to DB", name, " - ", endTime);
-                        this._scoreService.postItem({ "username": name, "time": endTime });
+                        this._scoreService.postItem({ "username": name, "time": endTime }).subscribe();
                     }
                 };
                 __decorate([
