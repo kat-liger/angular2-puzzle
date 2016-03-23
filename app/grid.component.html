@@ -1,5 +1,6 @@
-<timer></timer>
-<button (click)="initGrid()">Start a new game</button>
+<span>Put the shades into the correct order (from light to dark)</span>
+<timer #f></timer>
+<button (click)="f.startTimer(); ngOnInit();">Start a new game</button>
 <br/><br/>
 <div class="slidegrid">
     <div *ngFor="#item of grid; #i=index" class="cell" id="cell{{item}}" (click)="checkClicked(i)">

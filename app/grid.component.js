@@ -70,7 +70,6 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                         str = "rgb(" + r + "," + g + "," + b + ")";
                         colors.unshift(str);
                     }
-                    console.log(colors);
                     return colors;
                 };
                 GridComponent.prototype.checkClicked = function (index) {

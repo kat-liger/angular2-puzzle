@@ -18,10 +18,6 @@ System.register(['angular2/core'], function(exports_1) {
         execute: function() {
             TimerComponent = (function () {
                 function TimerComponent() {
-                    this.time = 0;
-                    this.timeStr = '00:00:00';
-                    this.currentTime = new Date().getTime();
-                    this.initialTime = this.currentTime;
                 }
                 TimerComponent.prototype.ngOnInit = function () {
                     console.log("timer init");
@@ -53,6 +49,10 @@ System.register(['angular2/core'], function(exports_1) {
                 ;
                 TimerComponent.prototype.startTimer = function () {
                     var _this = this;
+                    this.time = 0;
+                    this.timeStr = '00:00:00';
+                    this.currentTime = new Date().getTime();
+                    this.initialTime = this.currentTime;
                     this.interval = setInterval(function () {
                         var currentTime = new Date().getTime();
                         _this.time = currentTime - _this.initialTime;

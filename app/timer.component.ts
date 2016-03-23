@@ -7,10 +7,10 @@ import {Component, OnInit} from 'angular2/core';
 
 export class TimerComponent implements OnInit {
 
-    public time = 0;
-    public timeStr = '00:00:00';
-    private currentTime = new Date().getTime();
-    private initialTime = this.currentTime;
+    public time;
+    public timeStr;
+    private currentTime;
+    private initialTime;
     public interval;
 
     ngOnInit() {
@@ -47,6 +47,10 @@ export class TimerComponent implements OnInit {
     };
 
     public startTimer() {
+        this.time = 0;
+        this.timeStr = '00:00:00';
+        this.currentTime = new Date().getTime();
+        this.initialTime = this.currentTime;
         this.interval = setInterval(
             () => {
                 var currentTime = new Date().getTime();

@@ -25,12 +25,10 @@ System.register(['angular2/core', 'angular2/router', './score.component', './gri
                 grid_component_1 = grid_component_1_1;
             }],
         execute: function() {
-            //import {HTTP_BINDINGS} from 'angular2/http';
             AppComponent = (function () {
                 function AppComponent() {
-                    this.title = 'Puzzle';
+                    this.title = 'Shades';
                 }
-                //private modal: Modal;
                 AppComponent.prototype.ngOnInit = function () {
                     console.log("main app init");
                 };
@@ -45,7 +43,6 @@ System.register(['angular2/core', 'angular2/router', './score.component', './gri
                             grid_component_1.GridComponent,
                             score_component_1.ScoreComponent
                         ],
-                        //providers: [Modal]
                         providers: [
                             router_1.ROUTER_PROVIDERS
                         ]

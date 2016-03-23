@@ -61,7 +61,6 @@ export class GridComponent implements OnInit {
             str = "rgb("+r+","+g+","+b+")";
             colors.unshift(str);
         }
-        console.log(colors);
         return colors;
     }
 
