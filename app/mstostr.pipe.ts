@@ -1,7 +1,7 @@
 import {Pipe, PipeTransform} from 'angular2/core';
 
 /*
- * Transform time in ms to hh:mm:ss string
+ * Transforms time in ms to hh:mm:ss string
  * Usage:
  *   time | msToStr
  *
@@ -15,9 +15,9 @@ export class MsToStrPipe implements PipeTransform {
         var seconds = Math.floor(time / 1000);
         var h = 3600;
         var m = 60;
-        var hours = Math.floor(seconds/h);
-        var minutes = Math.floor( (seconds % h)/m );
-        var scnds = Math.floor( (seconds % m) );
+        var hours : any = Math.floor(seconds/h);
+        var minutes : any = Math.floor( (seconds % h)/m );
+        var scnds : any = Math.floor( (seconds % m) );
         var timeString = '';
         if(scnds < 10) scnds = "0"+scnds;
         if(hours < 10) hours = "0"+hours;

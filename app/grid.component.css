@@ -26,16 +26,11 @@
 .cell span {
     width: 100%;
     height: 100%;
-    background-color: darkgreen;
     color: white;
     font-size: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.empty-cell {
-    background-color: white;
 }
 
 /* mobile */

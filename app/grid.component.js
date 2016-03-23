@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', './timer.component', './services/score.service'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/common', './timer.component', './services/score.service'], function(exports_1) {
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -8,7 +8,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './timer.c
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, core_2, http_1, timer_component_1, score_service_1;
+    var core_1, router_1, core_2, http_1, common_1, timer_component_1, score_service_1;
     var GridComponent;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './timer.c
             function (http_1_1) {
                 http_1 = http_1_1;
             },
+            function (common_1_1) {
+                common_1 = common_1_1;
+            },
             function (timer_component_1_1) {
                 timer_component_1 = timer_component_1_1;
             },
@@ -33,6 +36,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './timer.c
                 function GridComponent(_scoreService) {
                     this._scoreService = _scoreService;
                     this.grid = [];
+                    this.colors = [];
                 }
                 GridComponent.prototype.initGrid = function () {
                     var i = 1;
@@ -43,12 +47,32 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './timer.c
                 };
                 ;
                 GridComponent.prototype.ngOnInit = function () {
+                    this.colors = this.getColors();
                     this.initGrid();
                     //shuffle the grid array in random order
-                    this.shuffle(this.grid);
+                    //this.shuffle(this.grid);
                     this.swap(7, this.grid.indexOf(null));
                 };
                 ;
+                GridComponent.prototype.getColors = function () {
+                    var colors = [];
+                    var max = 80;
+                    var min = 0;
+                    var r = (Math.floor(Math.random() * (max - min + 1)) + min) % 256;
+                    var g = (Math.floor(Math.random() * (max - min + 1)) + min) % 256;
+                    var b = (Math.floor(Math.random() * (max - min + 1)) + min) % 256;
+                    var str = "";
+                    colors.push("rgb(" + r + "," + g + "," + b + ")");
+                    for (var i = 0; i < 7; i++) {
+                        r += 32;
+                        g += 32;
+                        b += 32;
+                        str = "rgb(" + r + "," + g + "," + b + ")";
+                        colors.unshift(str);
+                    }
+                    console.log(colors);
+                    return colors;
+                };
                 GridComponent.prototype.checkClicked = function (index) {
                     this.checkNeighbors(index);
                 };
@@ -120,7 +144,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', './timer.c
                         styleUrls: ['app/shared/styles.css', 'app/grid.component.css'],
                         directives: [
                             router_1.ROUTER_DIRECTIVES,
-                            timer_component_1.TimerComponent
+                            timer_component_1.TimerComponent,
+                            common_1.NgStyle
                         ],
                         providers: [http_1.HTTP_PROVIDERS, score_service_1.ScoreService]
                     }), 

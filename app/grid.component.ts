@@ -2,6 +2,7 @@ import {Component, OnInit, Injector, provide} from 'angular2/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 import {ViewChild} from 'angular2/core';
 import { HTTP_PROVIDERS } from 'angular2/http';
+import { NgStyle } from 'angular2/common';
 
 import { TimerComponent } from './timer.component';
 import { ScoreService } from './services/score.service';
@@ -12,13 +13,15 @@ import { ScoreService } from './services/score.service';
     styleUrls: ['app/shared/styles.css','app/grid.component.css'],
     directives: [
         ROUTER_DIRECTIVES,
-        TimerComponent
+        TimerComponent,
+        NgStyle
     ],
     providers: [HTTP_PROVIDERS, ScoreService]
 })
 
 export class GridComponent implements OnInit {
     public grid:number[] = [];
+    public colors:any[] = [];
 
     @ViewChild(TimerComponent)
     private _timerComponent: TimerComponent;
@@ -35,11 +38,32 @@ export class GridComponent implements OnInit {
     };
 
     ngOnInit() {
+        this.colors = this.getColors();
         this.initGrid();
         //shuffle the grid array in random order
-        this.shuffle(this.grid);
+        //this.shuffle(this.grid);
         this.swap(7,this.grid.indexOf(null));
     };
+
+    getColors() {
+        var colors:any[] = [];
+        var max: number = 80;
+        var min: number  = 0;
+        var r = (Math.floor(Math.random() * (max - min + 1)) + min)%256;
+        var g = (Math.floor(Math.random() * (max - min + 1)) + min)%256;
+        var b = (Math.floor(Math.random() * (max - min + 1)) + min)%256;
+        var str: string = "";
+        colors.push("rgb("+r+","+g+","+b+")");
+        for (var i=0; i<7; i++) {
+            r += 32;
+            g += 32;
+            b += 32;
+            str = "rgb("+r+","+g+","+b+")";
+            colors.unshift(str);
+        }
+        console.log(colors);
+        return colors;
+    }
 
     checkClicked(index) {
         this.checkNeighbors(index);

@@ -1,25 +1,9 @@
 <timer></timer>
-<!--<button (click)="f.stopTimer()">Stop Timer</button>-->
-    <!--<span [(ngModel)]="title">Bugaga</span>-->
-    <!--<input [(ngModel)]="title"/>
-    <button (click)="hello()">Button</button>-->
-
-    <!--<div class="slidegrid">
-        <div class="cell"><span>1</span></div>
-        <div class="cell"><span>2</span></div>
-        <div class="cell"><span>3</span></div>
-        <div class="cell"><span>4</span></div>
-        <div class="cell"><span>5</span></div>
-        <div class="cell"><span>6</span></div>
-        <div class="cell"><span>7</span></div>
-        <div class="cell empty-cell"></div>
-        <div class="cell"><span>8</span></div>
-    </div>
-    <br/><br/>-->
+<button (click)="initGrid()">Start a new game</button>
+<br/><br/>
 <div class="slidegrid">
     <div *ngFor="#item of grid; #i=index" class="cell" id="cell{{item}}" (click)="checkClicked(i)">
-        <!--<span>{{item | json}} - {{i}}</span>-->
-        <span>{{item | json}}</span>
+        <span [ngStyle]="{ 'background-color': colors[i] }">{{item}}</span>
     </div>
 </div>
 <a [routerLink]="['Score']"><h2>Check the Score!</h2></a>
