@@ -41,13 +41,13 @@ export class GridComponent implements OnInit {
         this.colors = this.getColors();
         this.initGrid();
         //shuffle the grid array in random order
-        //this.shuffle(this.grid);
+        this.shuffle();
         this.swap(7,this.grid.indexOf(null));
     };
 
     getColors() {
         var colors:any[] = [];
-        var max: number = 80;
+        var max: number = 45;
         var min: number  = 0;
         var r = (Math.floor(Math.random() * (max - min + 1)) + min)%256;
         var g = (Math.floor(Math.random() * (max - min + 1)) + min)%256;
@@ -55,9 +55,9 @@ export class GridComponent implements OnInit {
         var str: string = "";
         colors.push("rgb("+r+","+g+","+b+")");
         for (var i=0; i<7; i++) {
-            r += 32;
-            g += 32;
-            b += 32;
+            r += 30;
+            g += 30;
+            b += 30;
             str = "rgb("+r+","+g+","+b+")";
             colors.unshift(str);
         }
@@ -96,6 +96,10 @@ export class GridComponent implements OnInit {
         var temp = this.grid[index1];
         this.grid[index1] = this.grid[index2];
         this.grid[index2] = temp;
+
+        temp = this.colors[index1];
+        this.colors[index1] = this.colors[index2];
+        this.colors[index2] = temp;
     };
 
     sameArray(array1, array2) {
@@ -108,7 +112,17 @@ export class GridComponent implements OnInit {
      * Shuffles array in place.
      * @param {Array} a items The array containing the items.
      */
-    shuffle(a) {
+    shuffle() {
+        var j, x, i;
+        for (i = this.grid.length; i; i -= 1) {
+            j = Math.floor(Math.random() * i);
+            x = this.grid[i - 1];
+            this.grid[i - 1] = this.grid[j];
+            this.grid[j] = x;
+        }
+    };
+
+    shuffle_old(a) {
         var j, x, i;
         for (i = a.length; i; i -= 1) {
             j = Math.floor(Math.random() * i);
@@ -124,7 +138,6 @@ export class GridComponent implements OnInit {
         var endTimeStr = this._timerComponent.timeStr;
         var name = prompt("Congrats! You won and your result is " + endTimeStr + " Please enter your name to save your awesome result to our database");
         if ( name ) {
-            console.log("now we can save the data to DB", name, " - ", endTime);
             this._scoreService.postItem({ "username": name, "time": endTime }).subscribe( );
         }
     }

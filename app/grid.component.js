@@ -50,13 +50,13 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                     this.colors = this.getColors();
                     this.initGrid();
                     //shuffle the grid array in random order
-                    //this.shuffle(this.grid);
+                    this.shuffle();
                     this.swap(7, this.grid.indexOf(null));
                 };
                 ;
                 GridComponent.prototype.getColors = function () {
                     var colors = [];
-                    var max = 80;
+                    var max = 45;
                     var min = 0;
                     var r = (Math.floor(Math.random() * (max - min + 1)) + min) % 256;
                     var g = (Math.floor(Math.random() * (max - min + 1)) + min) % 256;
@@ -64,9 +64,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                     var str = "";
                     colors.push("rgb(" + r + "," + g + "," + b + ")");
                     for (var i = 0; i < 7; i++) {
-                        r += 32;
-                        g += 32;
-                        b += 32;
+                        r += 30;
+                        g += 30;
+                        b += 30;
                         str = "rgb(" + r + "," + g + "," + b + ")";
                         colors.unshift(str);
                     }
@@ -100,6 +100,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                     var temp = this.grid[index1];
                     this.grid[index1] = this.grid[index2];
                     this.grid[index2] = temp;
+                    temp = this.colors[index1];
+                    this.colors[index1] = this.colors[index2];
+                    this.colors[index2] = temp;
                 };
                 ;
                 GridComponent.prototype.sameArray = function (array1, array2) {
@@ -112,7 +115,17 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                  * Shuffles array in place.
                  * @param {Array} a items The array containing the items.
                  */
-                GridComponent.prototype.shuffle = function (a) {
+                GridComponent.prototype.shuffle = function () {
+                    var j, x, i;
+                    for (i = this.grid.length; i; i -= 1) {
+                        j = Math.floor(Math.random() * i);
+                        x = this.grid[i - 1];
+                        this.grid[i - 1] = this.grid[j];
+                        this.grid[j] = x;
+                    }
+                };
+                ;
+                GridComponent.prototype.shuffle_old = function (a) {
                     var j, x, i;
                     for (i = a.length; i; i -= 1) {
                         j = Math.floor(Math.random() * i);
@@ -128,7 +141,6 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                     var endTimeStr = this._timerComponent.timeStr;
                     var name = prompt("Congrats! You won and your result is " + endTimeStr + " Please enter your name to save your awesome result to our database");
                     if (name) {
-                        console.log("now we can save the data to DB", name, " - ", endTime);
                         this._scoreService.postItem({ "username": name, "time": endTime }).subscribe();
                     }
                 };
