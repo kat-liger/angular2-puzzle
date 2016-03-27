@@ -1,4 +1,6 @@
-System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/common', './timer.component', './services/score.service'], function(exports_1) {
+System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/common', './timer.component', './services/score.service'], function(exports_1, context_1) {
+    "use strict";
+    var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
         if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -51,7 +53,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                     this.initGrid();
                     //shuffle the grid array in random order
                     this.shuffle();
-                    this.swap(7, this.grid.indexOf(null));
+                    this.swap(this.grid, 7, this.grid.indexOf(null));
+                    this.swap(this.colors, 7, this.colors.indexOf('rgb(255,255,255)'));
                 };
                 ;
                 GridComponent.prototype.getColors = function () {
@@ -70,6 +73,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                         str = "rgb(" + r + "," + g + "," + b + ")";
                         colors.unshift(str);
                     }
+                    colors.push("rgb(255,255,255)");
                     return colors;
                 };
                 GridComponent.prototype.checkClicked = function (index) {
@@ -87,7 +91,8 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                         }
                         else {
                             //console.log("we can swap");
-                            this.swap(indexNull, index);
+                            this.swap(this.grid, indexNull, index);
+                            this.swap(this.colors, indexNull, index);
                             if (this.sameArray(this.grid, [1, 2, 3, 4, 5, 6, 7, 8, null]) ||
                                 this.sameArray(this.grid, [1, 2, 3, 4, 5, 6, 7, null, 8])) {
                                 this.notifyWinner();
@@ -96,13 +101,10 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                     }
                 };
                 ;
-                GridComponent.prototype.swap = function (index1, index2) {
-                    var temp = this.grid[index1];
-                    this.grid[index1] = this.grid[index2];
-                    this.grid[index2] = temp;
-                    temp = this.colors[index1];
-                    this.colors[index1] = this.colors[index2];
-                    this.colors[index2] = temp;
+                GridComponent.prototype.swap = function (arr, index1, index2) {
+                    var temp = arr[index1];
+                    arr[index1] = arr[index2];
+                    arr[index2] = temp;
                 };
                 ;
                 GridComponent.prototype.sameArray = function (array1, array2) {
@@ -122,16 +124,9 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                         x = this.grid[i - 1];
                         this.grid[i - 1] = this.grid[j];
                         this.grid[j] = x;
-                    }
-                };
-                ;
-                GridComponent.prototype.shuffle_old = function (a) {
-                    var j, x, i;
-                    for (i = a.length; i; i -= 1) {
-                        j = Math.floor(Math.random() * i);
-                        x = a[i - 1];
-                        a[i - 1] = a[j];
-                        a[j] = x;
+                        x = this.colors[i - 1];
+                        this.colors[i - 1] = this.colors[j];
+                        this.colors[j] = x;
                     }
                 };
                 ;
@@ -163,7 +158,7 @@ System.register(['angular2/core', 'angular2/router', 'angular2/http', 'angular2/
                     __metadata('design:paramtypes', [score_service_1.ScoreService])
                 ], GridComponent);
                 return GridComponent;
-            })();
+            }());
             exports_1("GridComponent", GridComponent);
         }
     }

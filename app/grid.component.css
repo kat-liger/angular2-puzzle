@@ -2,7 +2,8 @@
     width: 100%;
     height: 100%;
 }
-.slidegrid{
+
+.slidegrid {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
@@ -35,8 +36,11 @@
 
 /* mobile */
 
-@media only screen and (max-width: 640px) {
-    .slidegrid{
+@media only screen and (max-width: 800px) {
+    .main {
+        font-size: 30px;
+    }
+    .slidegrid {
         width: 90vw;
         height: 90vw;
     }

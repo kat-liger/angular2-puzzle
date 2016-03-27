@@ -4,7 +4,7 @@
 <br/><br/>
 <div class="slidegrid">
     <div *ngFor="#item of grid; #i=index" class="cell" id="cell{{item}}" (click)="checkClicked(i)">
-        <span [ngStyle]="{ 'background-color': colors[i] }">{{item}}</span>
+        <span [ngStyle]="{ 'background-color': colors[i] }"></span>
     </div>
 </div>
 <a [routerLink]="['Score']"><h2>Check the Score Table!</h2></a>

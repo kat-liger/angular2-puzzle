@@ -42,7 +42,8 @@ export class GridComponent implements OnInit {
         this.initGrid();
         //shuffle the grid array in random order
         this.shuffle();
-        this.swap(7,this.grid.indexOf(null));
+        this.swap(this.grid, 7, this.grid.indexOf(null));
+        this.swap(this.colors, 7,this.colors.indexOf('rgb(255,255,255)'));
     };
 
     getColors() {
@@ -61,6 +62,7 @@ export class GridComponent implements OnInit {
             str = "rgb("+r+","+g+","+b+")";
             colors.unshift(str);
         }
+        colors.push("rgb(255,255,255)");
         return colors;
     }
 
@@ -82,7 +84,8 @@ export class GridComponent implements OnInit {
                 //console.log("we cannot swap");
             } else {
                 //console.log("we can swap");
-                this.swap(indexNull, index);
+                this.swap(this.grid, indexNull, index);
+                this.swap(this.colors, indexNull, index);
 
                 if (this.sameArray(this.grid, [1, 2, 3, 4, 5, 6, 7, 8, null]) ||
                     this.sameArray(this.grid, [1, 2, 3, 4, 5, 6, 7, null, 8])) {
@@ -92,14 +95,10 @@ export class GridComponent implements OnInit {
         }
     };
 
-    swap(index1, index2) {
-        var temp = this.grid[index1];
-        this.grid[index1] = this.grid[index2];
-        this.grid[index2] = temp;
-
-        temp = this.colors[index1];
-        this.colors[index1] = this.colors[index2];
-        this.colors[index2] = temp;
+    swap(arr, index1, index2) {
+        var temp = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = temp;
     };
 
     sameArray(array1, array2) {
@@ -119,16 +118,10 @@ export class GridComponent implements OnInit {
             x = this.grid[i - 1];
             this.grid[i - 1] = this.grid[j];
             this.grid[j] = x;
-        }
-    };
 
-    shuffle_old(a) {
-        var j, x, i;
-        for (i = a.length; i; i -= 1) {
-            j = Math.floor(Math.random() * i);
-            x = a[i - 1];
-            a[i - 1] = a[j];
-            a[j] = x;
+            x = this.colors[i - 1];
+            this.colors[i - 1] = this.colors[j];
+            this.colors[j] = x;
         }
     };
 
