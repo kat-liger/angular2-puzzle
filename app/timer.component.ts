@@ -14,7 +14,6 @@ export class TimerComponent implements OnInit {
     public interval;
 
     ngOnInit() {
-        console.log("timer init");
         this.startTimer();
     }
 

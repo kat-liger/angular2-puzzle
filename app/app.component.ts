@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     public title = 'Shades';
 
     ngOnInit() {
-        console.log("main app init");
+
     };
 
 

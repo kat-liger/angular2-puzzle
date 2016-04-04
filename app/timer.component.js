@@ -20,7 +20,6 @@ System.register(['angular2/core'], function(exports_1) {
                 function TimerComponent() {
                 }
                 TimerComponent.prototype.ngOnInit = function () {
-                    console.log("timer init");
                     this.startTimer();
                 };
                 /**

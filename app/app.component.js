@@ -30,7 +30,6 @@ System.register(['angular2/core', 'angular2/router', './score.component', './gri
                     this.title = 'Shades';
                 }
                 AppComponent.prototype.ngOnInit = function () {
-                    console.log("main app init");
                 };
                 ;
                 AppComponent = __decorate([
